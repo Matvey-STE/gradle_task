@@ -1,0 +1,72 @@
+task compileJava(group: "javaguru") {
+
+}
+task processResources(group: "javaguru") {
+
+}
+task classes(group: "javaguru") {
+
+}
+task javadoc(group: "javaguru") {
+
+}
+task compileTestJava(group: "javaguru") {
+
+}
+task processTestResources(group: "javaguru") {
+
+}
+task testClasses(group: "javaguru") {
+
+}
+task test(group: "javaguru") {
+
+}
+task check(group: "javaguru") {
+
+}
+task jar(group: "javaguru") {
+
+}
+task uploadArchives(group: "javaguru") {
+
+}
+task assemble(group: "javaguru") {
+
+}
+task build(group: "javaguru") {
+
+}
+
+task clean(group: "javaguru") {
+}
+
+build.dependsOn assemble
+build.dependsOn check
+
+check.dependsOn test
+
+test.dependsOn testClasses
+test.dependsOn classes
+
+testClasses.dependsOn processTestResources
+testClasses.dependsOn compileTestJava
+
+compileTestJava.dependsOn classes
+javadoc.dependsOn classes
+
+assemble.dependsOn jar
+uploadArchives.dependsOn jar
+
+jar.dependsOn classes
+
+classes.dependsOn compileJava
+classes.dependsOn processResources
+
+gradle.taskGraph.whenReady {
+    TaskExecutionGraph graph ->
+        println "Graph: "
+        graph.allTasks.each (it ->
+                println "${it.name}"
+        )
+}
